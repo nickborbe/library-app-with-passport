@@ -1,0 +1,40 @@
+<h2>Edit {{book.title}}</h2>
+
+
+<form action="/books/update/{{book._id}}" method="POST">
+
+
+<p>Title</p>
+
+<input type="text" name="theTitle" value=" {{book.title}}">
+
+
+<p>Author</p>
+
+
+<select name="theAuthor">
+
+
+  {{#each authors}}
+
+  {{#if this.isTheChosenOne}}
+  <option selected value="{{this._id}}">{{this.name}}</option>
+  {{else}}
+     <option value="{{this._id}}">{{this.name}}</option>
+  {{/if}}
+
+  {{/each}}
+
+
+</select>
+
+
+<p>Image</p>
+<input type="text" name="theImage"
+value="{{book.image}}"
+>
+
+
+<button>Save</button>
+
+</form>

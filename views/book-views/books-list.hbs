@@ -1,0 +1,33 @@
+
+{{#if theUser}}
+<a href="/secret">Secret Page</a>
+{{/if}}
+
+{{#each books}}
+
+<a href="/books/details/{{this._id}}">
+
+
+<h2>
+{{this.title}}
+</h2>
+
+</a>
+
+
+{{#if this.mine}}
+
+<form action="/books/delete/{{this._id}}" method="POST">
+    <button>Delete This Book</button>
+</form>
+
+
+<a href="/books/editbook/{{this._id}}">Edit This Book's Info</a>
+
+{{/if}}
+
+
+
+
+
+{{/each}}

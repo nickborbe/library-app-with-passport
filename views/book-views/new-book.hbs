@@ -1,0 +1,37 @@
+{{theUser.username}}
+
+
+
+<h2>Add a new book to the library</h2>
+
+
+<form action="/books/creation" method="POST">
+
+
+<p>Title</p>
+<input type="text" name="theTitle">
+
+
+<p>Author</p>
+
+<select name="theAuthor">
+
+    <option value="" selected disabled>Please Select One</option>
+
+{{#each allTheAuthors}}
+{{!-- the array of authors gets pulled from the Database  --}}
+<option value="{{this._id}}">{{this.name}}</option>
+
+{{/each}} 
+
+
+</select>
+
+
+<p>Image</p>
+<input type="text" name="theImage">
+
+
+<button>Save</button>
+
+</form>

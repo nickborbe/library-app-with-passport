@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    {{#if errorMessage}}
+    <div>{{errorMessage}}</div>
+    {{/if}}
+
+    <div class="navbar">
+      <a href="/books">All Books</a>
+      <a href="/books/create-new-book">Add a New Book</a> 
+      <a href="/authors">View Authors</a>
+
+    
+
+    
+
+
+    {{#if theUser}}
+    <form action="/logout" method="POST">
+    <button>Logout</button>
+    </form>
+
+    {{else}}
+
+      <a href="/signup">Signup</a>
+      <a href="/login">Login</a>
+    {{/if}}
+
+    </div>
+
+
+    {{{body}}}
+
+
+
+
+    <script src='/javascripts/script.js'></script>
+  </body>
+</html>
