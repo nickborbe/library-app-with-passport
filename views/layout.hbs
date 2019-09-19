@@ -10,10 +10,19 @@
     <div>{{errorMessage}}</div>
     {{/if}}
 
+      {{#if successMessage}}
+      <div>{{successMessage}}</div>
+      {{/if}}
+
     <div class="navbar">
       <a href="/books">All Books</a>
       <a href="/books/create-new-book">Add a New Book</a> 
       <a href="/authors">View Authors</a>
+
+      {{#if theUser.isAdmin}}
+      <a href="/create-new-account">Create New User</a>
+      <a href="/active-users">See All Users</a>
+      {{/if}}
 
     
 

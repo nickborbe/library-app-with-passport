@@ -26,8 +26,10 @@ router.get('/books', (req, res, next)=>{
 
         allTheBooks.forEach((eachBook)=>{
 
-                if(eachBook.creator.equals(req.user._id)){
+                if(eachBook.creator.equals(req.user._id) || req.user.isAdmin){
                     eachBook.mine = true;
+                    // now we are attaching a .mine key to all the books who have a creator equal to currently logged in user's ID
+                    // and also, if currently logged in user isAdmin, were attaching it to all of them
                 }
         })
 

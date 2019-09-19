@@ -19,19 +19,44 @@ router.get('/signup', (req, res, next)=>{
 
 router.post('/signup', (req, res, next)=>{
 
+    let admin = false;
+
+    console.log('------------', admin)
+    console.log(req.body)
+
+    if(req.user){
+        // here we check if someone is logged in 
+        if(req.user.isAdmin){
+            // and if someone if logged in we check if theyre an admin and if so we change the value of the variable to true
+            admin = req.body.role? req.body.role : false
+            // this is the same as 
+            // if(req.body.role){
+            //     admin= req.body.role
+            // }
+            // else{
+            //     admin = false
+            // }
+        }
+    }
+
+
+    console.log('-===========', admin)
+
+
+
     const username = req.body.theUsername;
     const password = req.body.thePassword;
 
 
     const salt  = bcrypt.genSaltSync(10);
-
     const hash = bcrypt.hashSync(password, salt);
 
 
 
     User.create({
         username: username,
-        password: hash
+        password: hash,
+        isAdmin: admin
     })
     .then(()=>{
 
@@ -81,6 +106,22 @@ router.get('/secret', (req, res, next)=>{
     }
 
 
+
+})
+
+router.get('/profile', (req, res, next)=>{
+    res.render('user-views/profile');
+})
+
+router.post('/account/delete-my-account', (req, res, next)=>{
+
+    User.findByIdAndRemove(req.user._id)
+    .then(()=>{
+        res.redirect('/')
+    })
+    .catch((err)=>{
+        next(err)
+    })
 
 })
 

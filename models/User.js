@@ -4,7 +4,10 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
     username: String,
-    password:  String
+    password:  String,
+    isAdmin: Boolean,
+    // role: {type: String, enum: ["Regular", "Employee", "Admin"] }
+    // ^ this would be how you would do it if oyu needed more than 2 roles
 })
 
 

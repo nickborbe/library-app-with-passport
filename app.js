@@ -127,6 +127,7 @@ app.use((req, res, next)=>{
   res.locals.theUser = req.user;
   // with passport, its always called req.user by default
 
+  res.locals.successMessage = req.flash('success');
   res.locals.errorMessage = req.flash('error');
 
   next();
@@ -149,6 +150,9 @@ app.use('/', authorRoutes);
 
 const userRoutes = require('./routes/user-routes');
 app.use('/', userRoutes);
+
+const adminRoutes = require('./routes/admin-routes');
+app.use('/', adminRoutes);
 
 
 module.exports = app;
