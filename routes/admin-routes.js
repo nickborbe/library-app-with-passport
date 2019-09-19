@@ -18,6 +18,7 @@ router.use((req, res, next)=>{
     }
   
     next();
+    // if you forget to put next() your app will freeze anytime you go to an admin route
   })
 
 
