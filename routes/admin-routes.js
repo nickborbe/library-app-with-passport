@@ -4,7 +4,10 @@ const router  = express.Router();
 
 const User    = require('../models/User');
 
-var checkIfAdmin = function(req, res, next){
+
+
+router.use((req, res, next)=>{
+      
     if(!req.user){
         req.flash('error', 'please log in to use this feature')
         res.redirect('/login')
@@ -13,11 +16,15 @@ var checkIfAdmin = function(req, res, next){
         req.flash('error', 'you do not have access to this feature')
         res.redirect('/')
     }
-}
+  
+    next();
+  })
 
 
 
-router.get('/create-new-account', checkIfAdmin(), (req, res, next)=>{
+
+
+router.get('/create-new-account', (req, res, next)=>{
 
      
 
@@ -25,7 +32,7 @@ router.get('/create-new-account', checkIfAdmin(), (req, res, next)=>{
 })
 
 
-router.get('/active-users', checkIfAdmin(), (req, res, next)=>{
+router.get('/active-users', (req, res, next)=>{
 
 
 
@@ -41,6 +48,11 @@ router.get('/active-users', checkIfAdmin(), (req, res, next)=>{
 
 
 })
+
+
+
+
+
 
 
 router.post('/admin/delete/:idThing', (req, res, next)=>{
