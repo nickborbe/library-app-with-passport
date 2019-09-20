@@ -1,18 +1,61 @@
 
+
+
+
 {{#if theUser}}
 <a href="/secret">Secret Page</a>
 {{/if}}
 
+
+<form id="add-new-book-form">
+
+    <p>Title</p>
+<input type="text" id="new-title">
+
+
+<p>Author</p>
+
+<select id="new-author">
+
+<option value="" selected disabled>Please Select One</option>
+
+{{#each allTheAuthors}}
+{{!-- the array of authors gets pulled from the Database  --}}
+<option value="{{this._id}}">{{this.name}}</option>
+
+{{/each}} 
+
+
+</select>
+
+
+<p>Image</p>
+<input type="text" id="new-image">
+
+
+<button>Save</button>
+
+</form>
+
+<div id="book-list" style="float: left">
 {{#each books}}
 
-<a href="/books/details/{{this._id}}">
+{{!-- <a href="/books/details/{{this._id}}"> --}}
+
 
 
 <h2>
 {{this.title}}
+<button 
+class = "fetch-details-button"
+data-id = "{{this._id}}"
+{{!-- data-blah ="hello" --}}
+{{!-- you can send whatever you want in the dataset --}}
+{{!-- the names are made up --}}
+  > See Details </button>
 </h2>
 
-</a>
+{{!-- </a> --}}
 
 
 {{#if this.mine}}
@@ -31,3 +74,15 @@
 
 
 {{/each}}
+
+
+</div>
+
+
+<div id="deets" class="details"></div>
+
+
+
+
+
+<script  src="/javascripts/book-fetch.js"></script>
