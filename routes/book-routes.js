@@ -8,10 +8,10 @@ const Author  = require('../models/Author');
 
 router.get('/books', (req, res, next)=>{
 
-    if(!req.user){
-        req.flash('error', "please login to view book selection")
-        res.redirect('/login');
-    }
+    // if(!req.user){
+    //     req.flash('error', "please login to view book selection")
+    //     res.redirect('/login');
+    // }
 
         // if(req.session.counter){
         //     req.session.counter++;
@@ -20,22 +20,31 @@ router.get('/books', (req, res, next)=>{
         // }
         // this is a useless example of how oyu can edit the session whenever/however you want
 
+    Author.find()
+    .then((allAuthors)=>{
+
     Book.find()
     .then((allTheBooks)=>{
 
 
+
+
         allTheBooks.forEach((eachBook)=>{
 
+            if(req.user){
+   
                 if(eachBook.creator.equals(req.user._id) || req.user.isAdmin){
                     eachBook.mine = true;
                     // now we are attaching a .mine key to all the books who have a creator equal to currently logged in user's ID
                     // and also, if currently logged in user isAdmin, were attaching it to all of them
                 }
+            }
         })
 
 
-        res.render('book-views/books-list', {books: allTheBooks})
+        res.render('book-views/books-list', {books: allTheBooks.reverse(), allTheAuthors: allAuthors})
 
+        })
     })
     .catch((err)=>{
         next(err);
@@ -89,7 +98,7 @@ router.post('/books/creation', (req, res, next)=>{
         title: title,
         author: author,
         image: image,
-        creator: req.user
+        creator: req.user._id
     })
     .then((result)=>{
 
