@@ -201,6 +201,11 @@ app.use('/', authorRoutes);
 const userRoutes = require('./routes/user-routes');
 app.use('/', userRoutes);
 
+
+const apiRoutes = require('./routes/api-routes');
+app.use('/api', apiRoutes);
+
+
 const adminRoutes = require('./routes/admin-routes');
 app.use('/', adminRoutes);
 
